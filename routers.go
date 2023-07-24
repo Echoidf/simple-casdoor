@@ -46,6 +46,8 @@ func NewRouter() *echo.Echo {
 
 	e.GET("/.well-known/jwks.json", api.GetJwks)
 
+	e.POST("/api/send-verification-code", api.SendVerificationCode)
+
 	// 以下的接口需要 token 认证
 	r := e.Group("/api")
 	r.Use(Authorize)
@@ -55,8 +57,6 @@ func NewRouter() *echo.Echo {
 	r.POST("/update-provider", api.UpdateProvider)
 
 	r.POST("/add-user", api.AddUser)
-
-	r.POST("/send-verification-code", api.SendVerificationCode)
 
 	return e
 }
@@ -78,9 +78,6 @@ func Authorize(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 		log.Printf("访问鉴权：{%s}", claims.User.Name)
 
-		// 设置userinfo
-		go func() {
-		}()
 		return next(c)
 	}
 }
