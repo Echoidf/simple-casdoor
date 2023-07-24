@@ -33,4 +33,17 @@ func init() {
 }
 ```
 
+### 更改 Mysql 数据源
 
+执行sql包下的DDL.sql，创建数据库表，然后在代码中更改为自己创建的`mysql`数据源
+
+`object.adapter.go`: 
+
+```go
+func InitAdapter() {
+	adapter = NewAdapter("mysql", "root:xxx@tcp(127.0.0.1:3306)/", "main")
+
+	tbMapper := core.NewPrefixMapper(core.SnakeMapper{}, "")
+	adapter.Engine.SetTableMapper(tbMapper)
+}
+```

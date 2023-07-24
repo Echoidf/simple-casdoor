@@ -19,7 +19,7 @@ type Adapter struct {
 var adapter *Adapter
 
 func InitAdapter() {
-	adapter = NewAdapter("mysql", "root:285637zq@tcp(192.168.211.209:3306)/", "main")
+	adapter = NewAdapter("mysql", "root:xxx@tcp(127.0.0.1:3306)/", "main")
 
 	tbMapper := core.NewPrefixMapper(core.SnakeMapper{}, "")
 	adapter.Engine.SetTableMapper(tbMapper)
